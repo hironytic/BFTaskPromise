@@ -28,102 +28,84 @@
 
 @implementation BFTask (PromiseLike)
 
+- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+        if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
+            return task;
+        } else {
+            return block(task);
+        }
+    }];
+}
+
+- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+        if ([task error] != nil || [task exception] != nil) {
+            return block(task);
+        } else {
+            return task;
+        }
+    }];
+}
+
+- (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
+    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+        block();
+        return task;
+    }];
+}
+
 - (BFTask *(^)(BFContinuationBlock))then {
     return ^BFTask *(BFContinuationBlock block) {
-        return [self continueWithBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
-                return task;
-            } else {
-                return block(task);
-            }
-        }];
+        return [self thenWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFContinuationBlock))catch {
     return ^BFTask *(BFContinuationBlock block) {
-        return [self continueWithBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil) {
-                return block(task);
-            } else {
-                return task;
-            }
-        }];
+        return [self catchWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFPFinallyBlock))finally; {
     return ^BFTask *(BFPFinallyBlock block) {
-        return [self continueWithBlock:^id(BFTask *task) {
-            block();
-            return task;
-        }];
+        return [self finallyWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOn {
     return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
-        return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
-                return task;
-            } else {
-                return block(task);
-            }
-        }];
+        return [self thenWithExecutor:executor withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))catchOn {
     return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
-        return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil) {
-                return block(task);
-            } else {
-                return task;
-            }
-        }];
+        return [self catchWithExecutor:executor withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn {
     return ^BFTask *(BFExecutor *executor, BFPFinallyBlock block) {
-        return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-            block();
-            return task;
-        }];
+        return [self finallyWithExecutor:executor withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFContinuationBlock))thenOnMain {
     return ^BFTask *(BFContinuationBlock block) {
-        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
-                return task;
-            } else {
-                return block(task);
-            }
-        }];
+        return [self thenWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFContinuationBlock))catchOnMain {
     return ^BFTask *(BFContinuationBlock block) {
-        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            if ([task error] != nil || [task exception] != nil) {
-                return block(task);
-            } else {
-                return task;
-            }
-        }];
+        return [self catchWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 
 - (BFTask *(^)(BFPFinallyBlock))finallyOnMain {
     return ^BFTask *(BFPFinallyBlock block) {
-        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            block();
-            return task;
-        }];
+        return [self finallyWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 

@@ -29,6 +29,11 @@ typedef void (^BFPFinallyBlock)();
 
 @interface BFTask (PromiseLike)
 
+- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block;
+- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block;
+- (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block;
+
+
 - (BFTask *(^)(BFContinuationBlock))then;
 - (BFTask *(^)(BFContinuationBlock))catch;
 - (BFTask *(^)(BFPFinallyBlock))finally;

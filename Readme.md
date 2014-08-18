@@ -54,8 +54,8 @@ You can also use `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `main
 
 ### Not a Promise!
 
-To be exact, Bolts's task is not a Promise. So this is not a Promise too.
-The purpose of this project is making the task-chain much readable.
+To be exact, Bolts' task is not a Promise. So this is not a Promise too.
+The purpose of this project is to make task-chains much readable.
 
 
 ### Hate Dot-Notation?

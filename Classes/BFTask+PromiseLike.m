@@ -24,6 +24,7 @@
 //
 
 #import "BFTask+PromiseLike.h"
+#import "BFExecutor.h"
 
 @implementation BFTask (PromiseLike)
 
@@ -87,6 +88,39 @@
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn {
     return ^BFTask *(BFExecutor *executor, BFPFinallyBlock block) {
         return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+            block();
+            return task;
+        }];
+    };
+}
+
+- (BFTask *(^)(BFContinuationBlock))thenOnMain {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
+                return task;
+            } else {
+                return block(task);
+            }
+        }];
+    };
+}
+
+- (BFTask *(^)(BFContinuationBlock))catchOnMain {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            if ([task error] != nil || [task exception] != nil) {
+                return block(task);
+            } else {
+                return task;
+            }
+        }];
+    };
+}
+
+- (BFTask *(^)(BFPFinallyBlock))finallyOnMain {
+    return ^BFTask *(BFPFinallyBlock block) {
+        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             block();
             return task;
         }];

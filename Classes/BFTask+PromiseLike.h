@@ -37,4 +37,8 @@ typedef void (^BFPFinallyBlock)();
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))catchOn;
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn;
 
+- (BFTask *(^)(BFContinuationBlock))thenOnMain;
+- (BFTask *(^)(BFContinuationBlock))catchOnMain;
+- (BFTask *(^)(BFPFinallyBlock))finallyOnMain;
+
 @end

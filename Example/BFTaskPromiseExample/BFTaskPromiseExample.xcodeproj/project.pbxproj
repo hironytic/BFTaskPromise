@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */; };
 		50DCEF41199EE58400EC94DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF40199EE58400EC94DC /* Foundation.framework */; };
 		50DCEF43199EE58400EC94DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF42199EE58400EC94DC /* CoreGraphics.framework */; };
 		50DCEF45199EE58400EC94DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF44199EE58400EC94DC /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		38406070437542B2806E36F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		50CB3CE519A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestExpectation+OHRetroCompat.h"; sourceTree = "<group>"; };
+		50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestExpectation+OHRetroCompat.m"; sourceTree = "<group>"; };
 		50DCEF3D199EE58400EC94DC /* BFTaskPromiseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFTaskPromiseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50DCEF40199EE58400EC94DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50DCEF42199EE58400EC94DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50CB3CE419A786550017ABC2 /* XCTestExpectation+Xcode5 */ = {
+			isa = PBXGroup;
+			children = (
+				50CB3CE519A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.h */,
+				50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */,
+			);
+			path = "XCTestExpectation+Xcode5";
+			sourceTree = "<group>";
+		};
 		50DCEF34199EE58400EC94DC = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				50DCEF65199EE58400EC94DC /* BFTaskPromiseExampleTests.m */,
+				50CB3CE419A786550017ABC2 /* XCTestExpectation+Xcode5 */,
 				50DCEF60199EE58400EC94DC /* Supporting Files */,
 			);
 			path = BFTaskPromiseExampleTests;
@@ -305,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50DCEF66199EE58400EC94DC /* BFTaskPromiseExampleTests.m in Sources */,
+				50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +452,7 @@
 		};
 		50DCEF6D199EE58400EC94DC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCACAA965C7F4681A487A540 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BFTaskPromiseExample.app/BFTaskPromiseExample";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -460,6 +475,7 @@
 		};
 		50DCEF6E199EE58400EC94DC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCACAA965C7F4681A487A540 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BFTaskPromiseExample.app/BFTaskPromiseExample";
 				FRAMEWORK_SEARCH_PATHS = (

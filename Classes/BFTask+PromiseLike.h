@@ -25,7 +25,7 @@
 
 #import "BFTask.h"
 
-typedef void (^BFPFinallyBlock)();
+typedef BFTask *(^BFPFinallyBlock)();
 
 @interface BFTask (PromiseLike)
 

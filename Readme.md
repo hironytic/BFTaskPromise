@@ -31,8 +31,9 @@ With this category, you can:
     // this block is called in error case.
     [self showErrorMessage:task.error];
     return nil;
-}).finally(^{
+}).finally(^BFTask *(){
     [self updateList];
+    return nil;
 });
 ```
 
@@ -52,7 +53,7 @@ You can also use `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `main
 });
 ```
 
-### Not a Promise!
+### Not a Promise
 
 To be exact, Bolts' task is not a Promise. So this is not a Promise too.
 The purpose of this project is to make task-chains much readable.

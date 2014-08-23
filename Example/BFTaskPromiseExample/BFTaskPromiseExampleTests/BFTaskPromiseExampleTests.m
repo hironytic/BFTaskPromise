@@ -28,7 +28,8 @@
 #import "BFTask+PromiseLike.h"
 #import "BFTaskCompletionSource.h"
 
-#define MY_ERROR_DOMAIN  @"MyErrorDomain"
+#define MY_ERROR_DOMAIN @"MyErrorDomain"
+#define MY_EXCEPTION    @"MyException"
 
 @interface BFTaskPromiseExampleTests : XCTestCase
 
@@ -51,7 +52,7 @@
 - (void)testThenShouldRunWhenSucceeded {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
     [BFTask taskWithResult:@30].then(^id(BFTask *task){
-        NSNumber *result = task.result;
+        NSNumber *result = [task result];
         XCTAssertEqual([result intValue], 30, "previous value should be passed.");
         [expectation fulfill];
         return nil;
@@ -73,11 +74,33 @@
     XCTAssertFalse(ran, @"then should not ran");
 }
 
-// TODO:
-#if 0
-testThenShouldNotRunWhenException
-testThenShouldNotRunWhenCancelled
-#endif
+- (void)testThenShouldNotRunWhenExceptionOccured {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    __block BOOL ran = NO;
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].then(^id(BFTask *task){
+        ran = YES;
+        return nil;
+    }).finally(^BFTask *(){
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    XCTAssertFalse(ran, @"then should not ran");
+}
+
+- (void)testThenShouldNotRunWhenCancelled {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    __block BOOL ran = NO;
+    [BFTask cancelledTask].then(^id(BFTask *task){
+        ran = YES;
+        return nil;
+    }).finally(^BFTask *(){
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    XCTAssertFalse(ran, @"then should not ran");
+}
 
 - (void)testCatchShouldNotRunWhenSucceeded {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
@@ -96,20 +119,38 @@ testThenShouldNotRunWhenCancelled
 - (void)testCatchShouldRunWhenError {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
     [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]].catch(^id(BFTask *task){
-        NSError *error = task.error;
-        XCTAssertEqualObjects(error.domain, MY_ERROR_DOMAIN, "error should be passed.");
+        NSError *error = [task error];
+        XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should be passed.");
         [expectation fulfill];
         return nil;
     });
     [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-// TODO:
-#if 0
-testCatchShouldRunWhenException
-testCatchShouldNotRunWhenCancelled
-#endif
+- (void)testCatchShouldRunWhenExceptionOccured {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].catch(^id(BFTask *task){
+        NSException *exception = [task exception];
+        XCTAssertEqualObjects([exception name], MY_EXCEPTION, "exception should be passed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
+- (void)testCatchShouldNotRunWhenCancelled {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    __block BOOL ran = NO;
+    [BFTask cancelledTask].catch(^id(BFTask *task){
+        ran = YES;
+        return nil;
+    }).finally(^BFTask *(){
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    XCTAssertFalse(ran, @"catch should not ran");
+}
 
 - (void)testFinallyShouldRunWhenSucceeded {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
@@ -129,12 +170,23 @@ testCatchShouldNotRunWhenCancelled
     [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-// TODO:
-#if 0
-testFinallyShouldRunWhenException
-testFinallyShouldRunWhenCancelled
-#endif
+- (void)testFinallyShouldRunWhenExceptionOccured {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].finally(^BFTask *(){
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
+- (void)testFinallyShouldRunWhenCancelled {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask cancelledTask].finally(^BFTask *(){
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
 - (BFTask *)delayAsyncAfter:(int64_t)milliseconds callback:(void (^)())callback {
     BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
@@ -175,64 +227,69 @@ testFinallyShouldRunWhenCancelled
     [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-// TODO:
-#if 0
-func testFinallyShouldNotChangeErrorValue() {
-    let expectation = expectationWithDescription("finish task");
-    HNTask.reject(MyError(message: "error1")).finally {
-        return nil
-    }.continueWith { context in
-        XCTAssertTrue(context.isError(), "error should remain")
-        if let error = context.error as? MyError {
-            XCTAssertEqual(error.message, "error1", "error value should not change")
-        } else {
-            XCTFail("error value shoule be MyError")
-        }
-        expectation.fulfill()
-        return (nil, nil)
-    }
-    waitForExpectationsWithTimeout(5.0, handler: nil)
+- (void)testFinallyShouldNotChangeErrorValue {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]].finally(^BFTask *(){
+        return nil;
+    }).catch(^id(BFTask *task) {
+        NSError *error = [task error];
+        XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-testFinallyShouldNotChangeExceptionValue
-
-func testFinallyShouldNotChangeResultValueAfterReturnedTasksCompletion() {
-    let expectation = expectationWithDescription("finish task");
-    HNTask.resolve(30).finally {
-        return self.delayAsync(100) { }
-    }.continueWith { context in
-        XCTAssertFalse(context.isError(), "error should not occured")
-        if let value = context.result as? Int {
-            XCTAssertEqual(value, 30, "result value should not change")
-        } else {
-            XCTFail("result value shoule be Int")
-        }
-        expectation.fulfill()
-        return (nil, nil)
-    }
-    waitForExpectationsWithTimeout(5.0, handler: nil)
+- (void)testFinallyShouldNotChangeExceptionValue {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].finally(^BFTask *(){
+        return nil;
+    }).catch(^id(BFTask *task) {
+        NSException *exception = [task exception];
+        XCTAssertEqualObjects([exception name], MY_EXCEPTION, "exception should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-func testFinallyShouldNotChangeErrorValueAfterReturnedTasksCompletion() {
-    let expectation = expectationWithDescription("finish task");
-    HNTask.reject(MyError(message: "error1")).finally {
-        return self.delayAsync(100) { }
-    }.continueWith { context in
-        XCTAssertTrue(context.isError(), "error should remain")
-        if let error = context.error as? MyError {
-            XCTAssertEqual(error.message, "error1", "error value should not change")
-        } else {
-            XCTFail("error value shoule be MyError")
-        }
-        expectation.fulfill()
-        return (nil, nil)
-    }
-    waitForExpectationsWithTimeout(5.0, handler: nil)
+- (void)testFinallyShouldNotChangeResultValueAfterReturnedTasksCompletion {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithResult:@30].finally(^BFTask *() {
+        return [self delayAsyncAfter:100 callback:^{ }];
+    }).then(^id(BFTask *task){
+        NSNumber *result = [task result];
+        XCTAssertEqual([result intValue], 30, @"result value should not change");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
-testFinallyShouldNotChangeExceptionValueAfterReturnedTasksCompletion
+- (void)testFinallyShouldNotChangeErrorValueAfterReturnedTasksCompletion {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]].finally(^BFTask *(){
+        return [self delayAsyncAfter:100 callback:^{ }];
+    }).catch(^id(BFTask *task) {
+        NSError *error = [task error];
+        XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
-
-#endif
+- (void)testFinallyShouldNotChangeExceptionValueAfterReturnedTasksCompletion {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].finally(^BFTask *(){
+        return [self delayAsyncAfter:100 callback:^{ }];
+    }).catch(^id(BFTask *task) {
+        NSException *exception = [task exception];
+        XCTAssertEqualObjects([exception name], MY_EXCEPTION, "exception should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
 @end

@@ -2,7 +2,7 @@
 // BFTask+PromiseLike.m
 // BFTaskPromise
 //
-// Copyright (c) 2014 Hironori Ichimiya <hiron@hironytic.com>
+// Copyright (c) 2014,2015 Hironori Ichimiya <hiron@hironytic.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -23,8 +23,8 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <Bolts/BFExecutor.h>
 #import "BFTask+PromiseLike.h"
-#import "BFExecutor.h"
 
 @implementation BFTask (PromiseLike)
 

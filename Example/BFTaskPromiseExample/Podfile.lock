@@ -1,10 +1,10 @@
 PODS:
-  - Bolts (1.1.1)
+  - Bolts (1.1.3)
 
 DEPENDENCIES:
   - Bolts
 
 SPEC CHECKSUMS:
-  Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
+  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0

@@ -69,6 +69,15 @@ But the task-chaining is a special case for me. It's unusual. I feel the task-ch
 
 ## Install
 
+### Using CocoaPods
+
+Write the following line to your Podfile:
+
+```
+pod 'BFTaskPromise'
+```
+### Manually
+
 Add `BFTask+PromiseLike.h` and `BFTask+PromiseLike.m` in `Classes` folder to your project.
 
 

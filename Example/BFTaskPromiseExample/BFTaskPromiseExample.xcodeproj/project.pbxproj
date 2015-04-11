@@ -487,6 +487,7 @@
 		};
 		50DCEF6E199EE58400EC94DC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E740620165F4DC5DB0CAB907 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BFTaskPromiseExample.app/BFTaskPromiseExample";
 				FRAMEWORK_SEARCH_PATHS = (

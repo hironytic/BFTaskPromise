@@ -1,0 +1,10 @@
+require 'xcjobs'
+
+XCJobs::Test.new('test') do |t|
+  t.build_dir = 'build'
+  t.workspace = 'BFTaskPromiseExample'
+  t.scheme = 'BFTaskPromiseExample'
+  t.configuration = 'Release'
+  t.add_destination('platform=iOS Simulator,name=iPad Air,OS=8.3')
+  t.formatter = 'xcpretty -c'
+end

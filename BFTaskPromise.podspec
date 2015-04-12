@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BFTaskPromise"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "An Objective-C category for BFTask class in Bolts-iOS."
 
   s.description  = <<-DESC
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    
                    * chain tasks with dot-notation as JavaScript Promise-like syntax. (no more counting brackets!)
                    * write a catch block which will be called in error case only.
-                   * write a finally block which will not change the result value.
+                   * write a finally block which will not change the result value unless the block fails.
                    DESC
 
   s.homepage     = "https://github.com/hironytic/BFTaskPromise"

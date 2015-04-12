@@ -292,4 +292,40 @@
     [self waitForExpectationsWithTimeout:5.0 handler:nil];
 }
 
+- (void)testFinallyShouldChangeResultValueToErrorValueWhenErrorIsReturned {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithResult:@30].finally(^BFTask *() {
+        return [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]];
+    }).then(^id(BFTask *task) {
+        XCTAssert(NO, "this code is not called because an error should be occured.");
+        [expectation fulfill];
+        return nil;
+    }).catch(^id(BFTask *task) {
+        NSError *error = [task error];
+        XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
+
+- (void)testFinallyShouldChangeResultValueToErrorValueAfterReturnedTaskReturnsError {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
+    [BFTask taskWithResult:@30].finally(^BFTask *() {
+        return [self delayAsyncAfter:100 callback:^{ }].then(^id(BFTask *task) {
+            return [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]];
+        });
+    }).then(^id(BFTask *task) {
+        XCTAssert(NO, "this code is not called because an error should be occured.");
+        [expectation fulfill];
+        return nil;
+    }).catch(^id(BFTask *task) {
+        NSError *error = [task error];
+        XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should not be changed.");
+        [expectation fulfill];
+        return nil;
+    });
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
+
 @end

@@ -9,7 +9,7 @@ With this category, you can:
 
 * chain tasks with dot-notation as JavaScript Promise-like syntax. (no more counting brackets!)
 * write a catch block which will be called in error case only.
-* write a finally block which won't change the result value.
+* write a finally block which won't change the result value unless the block fails.
 
 ### Example
 

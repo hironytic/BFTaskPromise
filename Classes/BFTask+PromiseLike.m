@@ -52,9 +52,9 @@
     return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
         BFTask *resultTask = block();
         if (resultTask != nil) {
-            return [resultTask continueWithBlock:^id(BFTask *task2) {
+            return resultTask.then(^id(BFTask *task2) {
                 return task;
-            }];
+            });
         } else {
             return task;
         }

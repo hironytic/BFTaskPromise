@@ -73,6 +73,12 @@
     };
 }
 
+- (BFTask *(^)(BFContinuationBlock))thenOrCatch {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
+    };
+}
+
 - (BFTask *(^)(BFPFinallyBlock))finally; {
     return ^BFTask *(BFPFinallyBlock block) {
         return [self finallyWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
@@ -91,6 +97,12 @@
     };
 }
 
+- (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOrCatchOn {
+    return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
+        return [self continueWithExecutor:executor withBlock:block];
+    };
+}
+
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn {
     return ^BFTask *(BFExecutor *executor, BFPFinallyBlock block) {
         return [self finallyWithExecutor:executor withBlock:block];
@@ -106,6 +118,12 @@
 - (BFTask *(^)(BFContinuationBlock))catchOnMain {
     return ^BFTask *(BFContinuationBlock block) {
         return [self catchWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
+    };
+}
+
+- (BFTask *(^)(BFContinuationBlock))thenOrCatchOnMain {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 

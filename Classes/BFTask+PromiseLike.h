@@ -36,6 +36,7 @@ typedef BFTask *(^BFPFinallyBlock)();
 
 - (BFTask *(^)(BFContinuationBlock))then;
 - (BFTask *(^)(BFContinuationBlock))catch;
+- (BFTask *(^)(BFContinuationBlock))catchWith;  // for Objective-C++
 - (BFTask *(^)(BFPFinallyBlock))finally;
 
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOn;

@@ -4,7 +4,7 @@ install:
   - bundle install --path=vendor/bundle --binstubs=vendor/bin
   - pod install
 script:
-  - bundle exec rake test coverage:coveralls
+  - bundle exec rake test
 
 branches:
   only: 

@@ -1,5 +1,7 @@
 language: objective-c
 install:
-  - cd Example/BFTaskPromiseExample && bundle install --path=vendor/bundle --binstubs=vendor/bin
+  - cd Example/BFTaskPromiseExample
+  - bundle install --path=vendor/bundle --binstubs=vendor/bin
+  - pod install
 script:
-  - cd Example/BFTaskPromiseExample && bundle exec rake test
+  - bundle exec rake test

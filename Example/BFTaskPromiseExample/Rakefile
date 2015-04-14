@@ -10,7 +10,28 @@ XCJobs::Test.new('test') do |t|
   t.coverage = true
 end
 
-XCJobs::Coverage::Coveralls.new() do |t|
+class MyCoveralls < XCJobs::Coverage::Coveralls
+      def upload(json_file)
+        curl_options = ['curl',  '-F', "json_file=@#{json_file}", 'https://coveralls.io/api/v1/jobs']
+        puts curl_options.join(' ')
+        Open3.popen2e(*curl_options) do |stdin, stdout_err, wait_thr|
+          output = ''
+          while line = stdout_err.gets
+            puts line
+            output << line
+          end
+      
+          status = wait_thr.value
+          if !status.success?
+            fail "upload failed (exited with status: #{status.exitstatus})"
+          end
+        end
+      end
+  
+end
+
+MyCoveralls.new() do |t|
+  puts "ENV['TRAVIS_JOB_ID']: #{ENV['TRAVIS_JOB_ID']}"
   t.add_extension('.m')
   t.add_exclude('Example/BFTaskPromiseExample/BFTaskPromiseExampleTests')
 end

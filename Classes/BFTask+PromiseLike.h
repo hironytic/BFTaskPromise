@@ -34,15 +34,18 @@ typedef BFTask *(^BFPFinallyBlock)();
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block;
 
 
+- (BFTask *(^)(BFContinuationBlock))continueWith;
 - (BFTask *(^)(BFContinuationBlock))then;
 - (BFTask *(^)(BFContinuationBlock))catch;
 - (BFTask *(^)(BFContinuationBlock))catchWith;  // for Objective-C++
 - (BFTask *(^)(BFPFinallyBlock))finally;
 
+- (BFTask *(^)(BFExecutor *, BFContinuationBlock))continueOn;
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOn;
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))catchOn;
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn;
 
+- (BFTask *(^)(BFContinuationBlock))continueOnMain;
 - (BFTask *(^)(BFContinuationBlock))thenOnMain;
 - (BFTask *(^)(BFContinuationBlock))catchOnMain;
 - (BFTask *(^)(BFPFinallyBlock))finallyOnMain;

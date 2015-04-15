@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500FCC601ADD12D500483B14 /* BFTaskPromiseCppTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */; };
 		50132F941A55970900FEFB30 /* BFTask+PromiseLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */; };
 		50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */; };
 		50DCEF41199EE58400EC94DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF40199EE58400EC94DC /* Foundation.framework */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		38406070437542B2806E36F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BFTaskPromiseCppTests.mm; sourceTree = "<group>"; };
 		50CB3CE519A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestExpectation+OHRetroCompat.h"; sourceTree = "<group>"; };
 		50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestExpectation+OHRetroCompat.m"; sourceTree = "<group>"; };
 		50DCEF3D199EE58400EC94DC /* BFTaskPromiseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFTaskPromiseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				50DCEF65199EE58400EC94DC /* BFTaskPromiseExampleTests.m */,
+				500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */,
 				50CB3CE419A786550017ABC2 /* XCTestExpectation+Xcode5 */,
 				50DCEF60199EE58400EC94DC /* Supporting Files */,
 			);
@@ -330,6 +333,7 @@
 			files = (
 				50DCEF66199EE58400EC94DC /* BFTaskPromiseExampleTests.m in Sources */,
 				50132F941A55970900FEFB30 /* BFTask+PromiseLike.m in Sources */,
+				500FCC601ADD12D500483B14 /* BFTaskPromiseCppTests.mm in Sources */,
 				50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

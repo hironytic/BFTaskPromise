@@ -73,7 +73,11 @@
     };
 }
 
-- (BFTask *(^)(BFPFinallyBlock))finally; {
+- (BFTask *(^)(BFContinuationBlock))catchWith {
+    return [self catch];
+}
+
+- (BFTask *(^)(BFPFinallyBlock))finally {
     return ^BFTask *(BFPFinallyBlock block) {
         return [self finallyWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };

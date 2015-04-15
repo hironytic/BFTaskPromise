@@ -1,5 +1,7 @@
 BFTaskPromise
 =============
+[![Build Status](https://travis-ci.org/hironytic/BFTaskPromise.svg?branch=master)](https://travis-ci.org/hironytic/BFTaskPromise)
+[![Coverage Status](https://coveralls.io/repos/hironytic/BFTaskPromise/badge.svg?branch=master)](https://coveralls.io/r/hironytic/BFTaskPromise?branch=master)
 
 ## About
 

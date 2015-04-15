@@ -14,7 +14,8 @@ With this category, you can:
 ### Example
 
 ```objc
-[self countUsersAsync].then(^id(BFTask *task) {
+[self countUsersAsync].continueWith(^id(BFTask *task) {
+    // this block is called regardless of the success or failure
     NSNumber *count = task.result;
     if ([count intValue] <= 0) {
         return [BFTask taskWithError:[NSError errorWithDomain:@"MyDomain"
@@ -24,7 +25,7 @@ With this category, you can:
         return [self makeTotalUserStringAsync:count];
     }
 }).then(^id(BFTask *task) {
-    // this block is skipped when task is failed.
+    // this block is skipped when the previous task is failed.
     [self showMessage:task.result];
     return nil;
 }).catch(^id(BFTask *task) {
@@ -39,8 +40,8 @@ With this category, you can:
 
 ### Executors
 
-If you want to specify the executor, use `thenOn`, `catchOn` and `finallyOn`.
-You can also use `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `mainThreadExecutor`. 
+If you want to specify the executor, use `continueOn`, `thenOn`, `catchOn` and `finallyOn`.
+You can also use `continueOnMain`, `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `mainThreadExecutor`. 
 
 ```objc
 [User findAllAsync].catchOn([BFExecutor mainThreadExecutor], ^id(BFTask *task) {

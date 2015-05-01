@@ -28,34 +28,42 @@
 
 @implementation BFTask (PromiseLike)
 
-- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block {
-    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFSuccessResultBlock)block {
+    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
         if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
             return task;
-        } else {
-            return block(task);
+        }
+        else {
+            return block(task.result);
         }
     }];
 }
 
-- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block {
-    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-        if ([task error] != nil || [task exception] != nil) {
-            return block(task);
-        } else {
+- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFErrorResultBlock)block {
+    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
+        if (task.error) {
+            return block(task.error);
+        }
+        else if (task.exception) {
+            NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
+            [dict setObject:task.exception.reason forKey:NSLocalizedDescriptionKey];
+            return block([NSError errorWithDomain:task.exception.name code:998 userInfo:dict]);
+        }
+        else {
             return task;
         }
     }];
 }
 
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
-    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
         BFTask *resultTask = block();
         if (resultTask != nil) {
-            return resultTask.then(^id(BFTask *task2) {
+            return resultTask.then ( ^id (BFTask *task2) {
                 return task;
             });
-        } else {
+        }
+        else {
             return task;
         }
     }];
@@ -67,19 +75,19 @@
     };
 }
 
-- (BFTask *(^)(BFContinuationBlock))then {
-    return ^BFTask *(BFContinuationBlock block) {
+- (BFTask *(^)(BFSuccessResultBlock))then {
+    return ^BFTask *(BFSuccessResultBlock block) {
         return [self thenWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFContinuationBlock))catch {
-    return ^BFTask *(BFContinuationBlock block) {
+- (BFTask *(^)(BFErrorResultBlock))catch {
+    return ^BFTask *(BFErrorResultBlock block) {
         return [self catchWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFContinuationBlock))catchWith {
+- (BFTask *(^)(BFErrorResultBlock))catchWith {
     return [self catch];
 }
 
@@ -95,14 +103,14 @@
     };
 }
 
-- (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOn {
-    return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
+- (BFTask *(^)(BFExecutor *, BFSuccessResultBlock))thenOn {
+    return ^BFTask *(BFExecutor *executor, BFSuccessResultBlock block) {
         return [self thenWithExecutor:executor withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFExecutor *, BFContinuationBlock))catchOn {
-    return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
+- (BFTask *(^)(BFExecutor *, BFErrorResultBlock))catchOn {
+    return ^BFTask *(BFExecutor *executor, BFErrorResultBlock block) {
         return [self catchWithExecutor:executor withBlock:block];
     };
 }
@@ -119,14 +127,14 @@
     };
 }
 
-- (BFTask *(^)(BFContinuationBlock))thenOnMain {
-    return ^BFTask *(BFContinuationBlock block) {
+- (BFTask *(^)(BFSuccessResultBlock))thenOnMain {
+    return ^BFTask *(BFSuccessResultBlock block) {
         return [self thenWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFContinuationBlock))catchOnMain {
-    return ^BFTask *(BFContinuationBlock block) {
+- (BFTask *(^)(BFErrorResultBlock))catchOnMain {
+    return ^BFTask *(BFErrorResultBlock block) {
         return [self catchWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }

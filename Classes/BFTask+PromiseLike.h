@@ -25,29 +25,32 @@
 
 #import <Bolts/BFTask.h>
 
+typedef id (^BFResultBlock)(id result, NSError *error);
+typedef id (^BFSuccessResultBlock)(id result);
+typedef id (^BFErrorResultBlock)(NSError *error);
 typedef BFTask *(^BFPFinallyBlock)();
 
 @interface BFTask (PromiseLike)
 
-- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block;
-- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFContinuationBlock)block;
+- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFSuccessResultBlock)block;
+- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFErrorResultBlock)block;
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block;
 
 
 - (BFTask *(^)(BFContinuationBlock))continueWith;
-- (BFTask *(^)(BFContinuationBlock))then;
-- (BFTask *(^)(BFContinuationBlock))catch;
-- (BFTask *(^)(BFContinuationBlock))catchWith;  // for Objective-C++
+- (BFTask *(^)(BFSuccessResultBlock))then;
+- (BFTask *(^)(BFErrorResultBlock))catch;
+- (BFTask *(^)(BFErrorResultBlock))catchWith;  // for Objective-C++
 - (BFTask *(^)(BFPFinallyBlock))finally;
 
 - (BFTask *(^)(BFExecutor *, BFContinuationBlock))continueOn;
-- (BFTask *(^)(BFExecutor *, BFContinuationBlock))thenOn;
-- (BFTask *(^)(BFExecutor *, BFContinuationBlock))catchOn;
+- (BFTask *(^)(BFExecutor *, BFSuccessResultBlock))thenOn;
+- (BFTask *(^)(BFExecutor *, BFErrorResultBlock))catchOn;
 - (BFTask *(^)(BFExecutor *, BFPFinallyBlock))finallyOn;
 
 - (BFTask *(^)(BFContinuationBlock))continueOnMain;
-- (BFTask *(^)(BFContinuationBlock))thenOnMain;
-- (BFTask *(^)(BFContinuationBlock))catchOnMain;
+- (BFTask *(^)(BFSuccessResultBlock))thenOnMain;
+- (BFTask *(^)(BFErrorResultBlock))catchOnMain;
 - (BFTask *(^)(BFPFinallyBlock))finallyOnMain;
 
 @end

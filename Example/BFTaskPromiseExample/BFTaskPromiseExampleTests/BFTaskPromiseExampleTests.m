@@ -125,8 +125,12 @@
 
 - (void)testCatchShouldRunWhenExceptionOccured {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
-    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].catch( ^id (NSError *error) {
-        XCTAssertEqualObjects(error.domain, MY_EXCEPTION, "exception should be passed.");
+    [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"reason" userInfo:nil]].catch( ^id (NSError *error) {
+        XCTAssertEqualObjects(error.domain, BFPTaskErrorDomain);
+        XCTAssertEqual(error.code, BFPTaskErrorException);
+        XCTAssertEqualObjects(error.userInfo[NSLocalizedDescriptionKey], @"reason");
+        NSException *exception = [error.userInfo objectForKey:BFPUnderlyingExceptionKey];
+        XCTAssertEqualObjects(exception.name, MY_EXCEPTION, "exception should be passed.");
         [expectation fulfill];
         return nil;
     });
@@ -238,7 +242,10 @@
     [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].finally( ^BFTask *() {
         return nil;
     }).catch( ^id (NSError *error) {
-        XCTAssertEqualObjects(error.domain, MY_EXCEPTION, "exception should not be changed.");
+        XCTAssertEqualObjects(error.domain, BFPTaskErrorDomain);
+        XCTAssertEqual(error.code, BFPTaskErrorException);
+        NSException *exception = [error.userInfo objectForKey:BFPUnderlyingExceptionKey];
+        XCTAssertEqualObjects(exception.name, MY_EXCEPTION, "exception should not be changed.");
         [expectation fulfill];
         return nil;
     });
@@ -274,7 +281,10 @@
     [BFTask taskWithException:[NSException exceptionWithName:MY_EXCEPTION reason:@"" userInfo:nil]].finally( ^BFTask *() {
         return [self delayAsyncAfter:100 callback: ^{}];
     }).catch( ^id (NSError *error) {
-        XCTAssertEqualObjects(error.domain, MY_EXCEPTION, "exception should not be changed.");
+        XCTAssertEqualObjects(error.domain, BFPTaskErrorDomain);
+        XCTAssertEqual(error.code, BFPTaskErrorException);
+        NSException *exception = [error.userInfo objectForKey:BFPUnderlyingExceptionKey];
+        XCTAssertEqualObjects(exception.name, MY_EXCEPTION, "exception should not be changed.");
         [expectation fulfill];
         return nil;
     });

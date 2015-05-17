@@ -25,6 +25,12 @@
 
 #import <Bolts/BFTask.h>
 
+extern NSString *const BFPTaskErrorDomain;
+extern NSString *const BFPUnderlyingExceptionKey;
+typedef NS_ENUM(NSInteger, BFPTaskErrorCode) {
+    BFPTaskErrorException   = 1,
+};
+
 typedef id (^BFPSuccessResultBlock)(id result);
 typedef id (^BFPErrorResultBlock)(NSError *error);
 typedef BFTask *(^BFPFinallyBlock)();

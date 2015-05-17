@@ -32,8 +32,7 @@
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
         if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
             return task;
-        }
-        else {
+        } else {
             return block(task.result);
         }
     }];
@@ -43,13 +42,11 @@
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
         if (task.error) {
             return block(task.error);
-        }
-        else if (task.exception) {
+        } else if (task.exception) {
             NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
             [dict setObject:task.exception.reason forKey:NSLocalizedDescriptionKey];
             return block([NSError errorWithDomain:task.exception.name code:998 userInfo:dict]);
-        }
-        else {
+        } else {
             return task;
         }
     }];
@@ -59,11 +56,10 @@
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
         BFTask *resultTask = block();
         if (resultTask != nil) {
-            return resultTask.then ( ^id (BFTask *task2) {
+            return resultTask.then( ^id (BFTask *task2) {
                 return task;
             });
-        }
-        else {
+        } else {
             return task;
         }
     }];

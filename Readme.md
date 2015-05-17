@@ -16,7 +16,7 @@ With this category, you can:
 ### Example
 
 ```objc
-[self countUsersAsync].continueWith(^id(BFTask *task) {
+[self countUsersAsync].continueWith(^id (BFTask *task) {
     // this block is called regardless of the success or failure
     NSNumber *count = task.result;
     if ([count intValue] <= 0) {
@@ -26,15 +26,15 @@ With this category, you can:
     } else {
         return [self makeTotalUserStringAsync:count];
     }
-}).then(^id(BFTask *task) {
+}).then(^id (NSString *totalUserString) {
     // this block is skipped when the previous task is failed.
-    [self showMessage:task.result];
+    [self showMessage:totalUserString];
     return nil;
-}).catch(^id(BFTask *task) {
+}).catch(^id (NSError *error) {
     // this block is called in error case.
-    [self showErrorMessage:task.error];
+    [self showErrorMessage:error];
     return nil;
-}).finally(^BFTask *(){
+}).finally(^BFTask * (){
     [self updateList];
     return nil;
 });
@@ -43,16 +43,31 @@ With this category, you can:
 ### Executors
 
 If you want to specify the executor, use `continueOn`, `thenOn`, `catchOn` and `finallyOn`.
-You can also use `continueOnMain`, `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `mainThreadExecutor`. 
+You can also use `continueOnMain`, `thenOnMain`, `catchOnMain` and `finallyOnMain`, they use `mainThreadExecutor`.
 
 ```objc
-[User findAllAsync].catchOn([BFExecutor mainThreadExecutor], ^id(BFTask *task) {
-    [self showAlert:task.error];
+[User findAllAsync].catchOn([BFExecutor mainThreadExecutor], ^id (NSError *error) {
+    [self showAlert:error];
 });
 
 // same as above
-[User findAllAsync].catchOnMain(^id(BFTask *task) {
-    [self showAlert:task.error];
+[User findAllAsync].catchOnMain(^id (NSError *error) {
+    [self showAlert:error];
+});
+```
+
+### Handling Exceptions
+
+If the task holds an exception, it is converted to `NSError` on passing it as a parameter of the `catch`-block.
+In this case, the domain of the converted error is `BFPTaskErrorDomain` and its code is `BFPTaskErrorException`.
+The original exception object can be retrieved from user info dictionary like this:
+
+```objc
+[self doSomethingAsync].catch( ^id (NSError *error) {
+    if ([BFPTaskErrorDomain isEqualToString:error.domain]
+        && error.code == BFPTaskErrorException) {
+        NSException *ex = [error.userInfo objectForKey:BFPUnderlyingExceptionKey];
+    }
 });
 ```
 
@@ -60,7 +75,6 @@ You can also use `continueOnMain`, `thenOnMain`, `catchOnMain` and `finallyOnMai
 
 To be exact, Bolts' task is not a Promise. So this is not a Promise too.
 The purpose of this project is to make task-chains much readable.
-
 
 ### Hate Dot-Notation?
 
@@ -77,11 +91,34 @@ But the task-chaining is a special case for me. It's unusual. I feel the task-ch
 Write the following line to your Podfile:
 
 ```
-pod 'BFTaskPromise'
+pod 'BFTaskPromise', '~> 2.0'
 ```
 ### Manually
 
 Add `BFTask+PromiseLike.h` and `BFTask+PromiseLike.m` in `Classes` folder to your project.
+
+
+## Migrating from 1.x to 2.0
+
+The parameter of the block passed to `then`/`catch` is changed in 2.0.
+A `then`-block takes a result value and a `catch`-block takes an error value.
+
+In prior to 2.0, the block parameter of both `then` and `catch` was a `BFTask` value.
+So if you have a code for 1.X like:
+
+```objc
+[foo loadAsync].then(^id (BFTask *task) {
+    bar.title = (NSString *)task.result;
+}
+```
+
+you must rewrite it to:
+
+```objc
+[foo loadAsync].then(^id (NSString *result) {
+    bar.title = result;
+}
+```
 
 
 ## License

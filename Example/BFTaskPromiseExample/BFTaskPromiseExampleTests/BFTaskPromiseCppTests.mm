@@ -47,8 +47,7 @@
 
 - (void)testCatchWithShouldRunWhenError {
     XCTestExpectation *expectation = [self expectationWithDescription:@"finish task"];
-    [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]].catchWith(^id(BFTask *task){
-        NSError *error = [task error];
+    [BFTask taskWithError:[NSError errorWithDomain:MY_ERROR_DOMAIN code:0 userInfo:nil]].catchWith( ^id (NSError *error) {
         XCTAssertEqualObjects([error domain], MY_ERROR_DOMAIN, "error should be passed.");
         [expectation fulfill];
         return nil;

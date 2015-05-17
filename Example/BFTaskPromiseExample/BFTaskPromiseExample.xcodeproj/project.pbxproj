@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		500FCC601ADD12D500483B14 /* BFTaskPromiseCppTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */; };
 		50132F941A55970900FEFB30 /* BFTask+PromiseLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */; };
+		502A5F661B087D1300FAF832 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 502A5F651B087D1300FAF832 /* SampleViewController.m */; };
 		50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */; };
 		50DCEF41199EE58400EC94DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF40199EE58400EC94DC /* Foundation.framework */; };
 		50DCEF43199EE58400EC94DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF42199EE58400EC94DC /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		38406070437542B2806E36F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BFTaskPromiseCppTests.mm; sourceTree = "<group>"; };
+		502A5F641B087D1300FAF832 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		502A5F651B087D1300FAF832 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		50CB3CE519A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestExpectation+OHRetroCompat.h"; sourceTree = "<group>"; };
 		50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestExpectation+OHRetroCompat.m"; sourceTree = "<group>"; };
 		50DCEF3D199EE58400EC94DC /* BFTaskPromiseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFTaskPromiseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,8 @@
 			children = (
 				50DCEF4F199EE58400EC94DC /* AppDelegate.h */,
 				50DCEF50199EE58400EC94DC /* AppDelegate.m */,
+				502A5F641B087D1300FAF832 /* SampleViewController.h */,
+				502A5F651B087D1300FAF832 /* SampleViewController.m */,
 				50DCEF52199EE58400EC94DC /* Images.xcassets */,
 				50DCEF47199EE58400EC94DC /* Supporting Files */,
 			);
@@ -323,6 +328,7 @@
 			files = (
 				50DCEF51199EE58400EC94DC /* AppDelegate.m in Sources */,
 				50DCEF4D199EE58400EC94DC /* main.m in Sources */,
+				502A5F661B087D1300FAF832 /* SampleViewController.m in Sources */,
 				50E9715E19A1CA1A001236EB /* BFTask+PromiseLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,7 +25,6 @@
 
 #import <Bolts/BFTask.h>
 
-typedef id (^BFResultBlock)(id result, NSError *error);
 typedef id (^BFSuccessResultBlock)(id result);
 typedef id (^BFErrorResultBlock)(NSError *error);
 typedef BFTask *(^BFPFinallyBlock)();

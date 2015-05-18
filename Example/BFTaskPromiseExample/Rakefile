@@ -12,5 +12,6 @@ end
 
 XCJobs::Coverage::Coveralls.new() do |t|
   t.add_extension('.m')
+  t.add_exclude('Example/BFTaskPromiseExample/BFTaskPromiseExample')
   t.add_exclude('Example/BFTaskPromiseExample/BFTaskPromiseExampleTests')
 end

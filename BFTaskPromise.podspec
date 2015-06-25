@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BFTaskPromise"
-  s.version      = "2.0.0"
+  s.version      = "2.1.0"
   s.summary      = "An Objective-C category for BFTask class in Bolts-iOS."
 
   s.description  = <<-DESC
@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   
   s.requires_arc = true
 
-  s.dependency "Bolts", "~> 1.1"
+  s.dependency 'Bolts/Tasks', '~> 1.2'
 end

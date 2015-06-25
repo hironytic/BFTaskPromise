@@ -1,1 +1,1 @@
-pod 'Bolts'
+pod 'Bolts/Tasks', '~> 1.2'

@@ -2,7 +2,7 @@
 // SampleViewController.m
 // BFTaskPromiseExample
 //
-// Copyright (c) 2015 Hironori Ichimiya <hiron@hironytic.com>
+// Copyright (c) 2015,2016 Hironori Ichimiya <hiron@hironytic.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the

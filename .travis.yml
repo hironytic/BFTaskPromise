@@ -1,4 +1,5 @@
 language: objective-c
+osx_image: xcode7.3
 install:
   - cd Example/BFTaskPromiseExample
   - bundle install --path=vendor/bundle --binstubs=vendor/bin

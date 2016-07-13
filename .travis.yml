@@ -1,13 +1,11 @@
 language: objective-c
 osx_image: xcode7.3
+cache: cocoapods
+before_install:
+  - gem install cocoapods
 install:
   - cd Example/BFTaskPromiseExample
   - bundle install --path=vendor/bundle --binstubs=vendor/bin
   - pod install
 script:
   - bundle exec rake test coverage:coveralls
-
-branches:
-  only: 
-    - master
-    - travis-test

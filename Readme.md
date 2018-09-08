@@ -5,7 +5,7 @@ BFTaskPromise
 
 ## About
 
-An Objective-C category for BFTask class in [Bolts-iOS](https://github.com/BoltsFramework/Bolts-iOS).
+An Objective-C category for BFTask class in [Bolts-ObjC](https://github.com/BoltsFramework/Bolts-ObjC).
 
 With this category, you can:
 
@@ -53,21 +53,6 @@ You can also use `continueOnMain`, `thenOnMain`, `catchOnMain` and `finallyOnMai
 // same as above
 [User findAllAsync].catchOnMain(^id (NSError *error) {
     [self showAlert:error];
-});
-```
-
-### Handling Exceptions
-
-If the task holds an exception, it is converted to `NSError` on passing it as a parameter of the `catch`-block.
-In this case, the domain of the converted error is `BFPTaskErrorDomain` and its code is `BFPTaskErrorException`.
-The original exception object can be retrieved from user info dictionary like this:
-
-```objc
-[self doSomethingAsync].catch( ^id (NSError *error) {
-    if ([BFPTaskErrorDomain isEqualToString:error.domain]
-        && error.code == BFPTaskErrorException) {
-        NSException *ex = [error.userInfo objectForKey:BFPUnderlyingExceptionKey];
-    }
 });
 ```
 

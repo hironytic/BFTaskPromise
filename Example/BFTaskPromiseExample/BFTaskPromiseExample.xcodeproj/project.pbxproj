@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		500FCC601ADD12D500483B14 /* BFTaskPromiseCppTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 500FCC5F1ADD12D500483B14 /* BFTaskPromiseCppTests.mm */; };
-		50132F941A55970900FEFB30 /* BFTask+PromiseLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */; };
 		502A5F661B087D1300FAF832 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 502A5F651B087D1300FAF832 /* SampleViewController.m */; };
 		50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CB3CE619A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m */; };
 		50DCEF41199EE58400EC94DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF40199EE58400EC94DC /* Foundation.framework */; };
@@ -23,7 +22,6 @@
 		50DCEF5C199EE58400EC94DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DCEF44199EE58400EC94DC /* UIKit.framework */; };
 		50DCEF64199EE58400EC94DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50DCEF62199EE58400EC94DC /* InfoPlist.strings */; };
 		50DCEF66199EE58400EC94DC /* BFTaskPromiseExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DCEF65199EE58400EC94DC /* BFTaskPromiseExampleTests.m */; };
-		50E9715E19A1CA1A001236EB /* BFTask+PromiseLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */; };
 		7068DB2A2CB9FD310C818679 /* libPods-BFTaskPromiseExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AE5E18140601A5D84D1491 /* libPods-BFTaskPromiseExample.a */; };
 		AA975B774F6BAB89CBBF5FC6 /* libPods-BFTaskPromiseExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F368123E4D055378AB0D5DC /* libPods-BFTaskPromiseExampleTests.a */; };
 /* End PBXBuildFile section */
@@ -61,8 +59,6 @@
 		50DCEF61199EE58400EC94DC /* BFTaskPromiseExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BFTaskPromiseExampleTests-Info.plist"; sourceTree = "<group>"; };
 		50DCEF63199EE58400EC94DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		50DCEF65199EE58400EC94DC /* BFTaskPromiseExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFTaskPromiseExampleTests.m; sourceTree = "<group>"; };
-		50E9715C19A1CA1A001236EB /* BFTask+PromiseLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BFTask+PromiseLike.h"; sourceTree = "<group>"; };
-		50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BFTask+PromiseLike.m"; sourceTree = "<group>"; };
 		84AE5E18140601A5D84D1491 /* libPods-BFTaskPromiseExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFTaskPromiseExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F368123E4D055378AB0D5DC /* libPods-BFTaskPromiseExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFTaskPromiseExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E6F45DFEA22A06E8A055F3 /* Pods-BFTaskPromiseExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFTaskPromiseExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BFTaskPromiseExample/Pods-BFTaskPromiseExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,7 +104,6 @@
 		50DCEF34199EE58400EC94DC = {
 			isa = PBXGroup;
 			children = (
-				50E9715B19A1C9B2001236EB /* Classes */,
 				50DCEF46199EE58400EC94DC /* BFTaskPromiseExample */,
 				50DCEF5F199EE58400EC94DC /* BFTaskPromiseExampleTests */,
 				50DCEF3F199EE58400EC94DC /* Frameworks */,
@@ -183,16 +178,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		50E9715B19A1C9B2001236EB /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				50E9715C19A1CA1A001236EB /* BFTask+PromiseLike.h */,
-				50E9715D19A1CA1A001236EB /* BFTask+PromiseLike.m */,
-			);
-			name = Classes;
-			path = ../../Classes;
-			sourceTree = "<group>";
-		};
 		C79855277C0E1079B440461C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,12 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50DCEF69199EE58400EC94DC /* Build configuration list for PBXNativeTarget "BFTaskPromiseExample" */;
 			buildPhases = (
+				2A25B06C00490F0579A796CA /* [CP] Check Pods Manifest.lock */,
 				192D6D08483A97EED98BCB51 /* 📦 Check Pods Manifest.lock */,
 				50DCEF39199EE58400EC94DC /* Sources */,
 				50DCEF3A199EE58400EC94DC /* Frameworks */,
 				50DCEF3B199EE58400EC94DC /* Resources */,
-				0C5FE611892A14D07FE216B3 /* 📦 Embed Pods Frameworks */,
-				3AF7BEC1EB27BABBFD2434A6 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,12 +215,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50DCEF6C199EE58400EC94DC /* Build configuration list for PBXNativeTarget "BFTaskPromiseExampleTests" */;
 			buildPhases = (
+				86880097880D323FCF1D5244 /* [CP] Check Pods Manifest.lock */,
 				B0B6BE3D0F276B9D0EDD4054 /* 📦 Check Pods Manifest.lock */,
 				50DCEF54199EE58400EC94DC /* Sources */,
 				50DCEF55199EE58400EC94DC /* Frameworks */,
 				50DCEF56199EE58400EC94DC /* Resources */,
-				D945FE172DACB4CCF05C3538 /* 📦 Embed Pods Frameworks */,
-				8373363168136659D68CFC86 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,7 +237,7 @@
 		50DCEF35199EE58400EC94DC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Hironytic;
 				TargetAttributes = {
 					50DCEF57199EE58400EC94DC = {
@@ -301,21 +284,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C5FE611892A14D07FE216B3 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFTaskPromiseExample/Pods-BFTaskPromiseExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		192D6D08483A97EED98BCB51 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,34 +299,40 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3AF7BEC1EB27BABBFD2434A6 /* 📦 Copy Pods Resources */ = {
+		2A25B06C00490F0579A796CA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BFTaskPromiseExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFTaskPromiseExample/Pods-BFTaskPromiseExample-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8373363168136659D68CFC86 /* 📦 Copy Pods Resources */ = {
+		86880097880D323FCF1D5244 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BFTaskPromiseExampleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFTaskPromiseExampleTests/Pods-BFTaskPromiseExampleTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0B6BE3D0F276B9D0EDD4054 /* 📦 Check Pods Manifest.lock */ = {
@@ -376,21 +350,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D945FE172DACB4CCF05C3538 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFTaskPromiseExampleTests/Pods-BFTaskPromiseExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -401,7 +360,6 @@
 				50DCEF51199EE58400EC94DC /* AppDelegate.m in Sources */,
 				50DCEF4D199EE58400EC94DC /* main.m in Sources */,
 				502A5F661B087D1300FAF832 /* SampleViewController.m in Sources */,
-				50E9715E19A1CA1A001236EB /* BFTask+PromiseLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +368,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50DCEF66199EE58400EC94DC /* BFTaskPromiseExampleTests.m in Sources */,
-				50132F941A55970900FEFB30 /* BFTask+PromiseLike.m in Sources */,
 				500FCC601ADD12D500483B14 /* BFTaskPromiseCppTests.mm in Sources */,
 				50CB3CE719A7866B0017ABC2 /* XCTestExpectation+OHRetroCompat.m in Sources */,
 			);
@@ -454,18 +411,32 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -478,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -492,25 +463,38 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -525,6 +509,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFTaskPromiseExample/BFTaskPromiseExample-Prefix.pch";
 				INFOPLIST_FILE = "BFTaskPromiseExample/BFTaskPromiseExample-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hironytic.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -539,6 +524,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFTaskPromiseExample/BFTaskPromiseExample-Prefix.pch";
 				INFOPLIST_FILE = "BFTaskPromiseExample/BFTaskPromiseExample-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hironytic.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -550,7 +536,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BFTaskPromiseExample.app/BFTaskPromiseExample";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
@@ -561,6 +546,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "BFTaskPromiseExampleTests/BFTaskPromiseExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hironytic.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -573,13 +559,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BFTaskPromiseExample.app/BFTaskPromiseExample";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFTaskPromiseExample/BFTaskPromiseExample-Prefix.pch";
 				INFOPLIST_FILE = "BFTaskPromiseExampleTests/BFTaskPromiseExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hironytic.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

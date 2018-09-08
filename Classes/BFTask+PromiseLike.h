@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, BFPTaskErrorCode) {
 
 typedef id (^BFPSuccessResultBlock)(id result);
 typedef id (^BFPErrorResultBlock)(NSError *error);
-typedef BFTask *(^BFPFinallyBlock)();
+typedef BFTask *(^BFPFinallyBlock)(void);
 
 @interface BFTask (PromiseLike)
 

@@ -26,9 +26,6 @@
 #import <Bolts/BFExecutor.h>
 #import "BFTask+PromiseLike.h"
 
-NSString *const BFPTaskErrorDomain = @"BFPTaskErrorDomain";
-NSString *const BFPUnderlyingExceptionKey = @"BFPUnderlyingException";
-
 @implementation BFTask (PromiseLike)
 
 - (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFPSuccessResultBlock)block {

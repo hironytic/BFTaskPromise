@@ -1,13 +1,13 @@
 PODS:
   - BFTaskPromise (2.2.0):
     - Bolts/Tasks (~> 1.9)
-  - Bolts/Tasks (1.9.0)
+  - Bolts/Tasks (1.9.1)
 
 DEPENDENCIES:
   - BFTaskPromise (from `../../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Bolts
 
 EXTERNAL SOURCES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  BFTaskPromise: 1917e1a370767fc599a7ca90ea87ed0b308497b8
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  BFTaskPromise: 8dbdebc01a17a0da23419878877e7367d5239053
+  Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
 
 PODFILE CHECKSUM: 766aba33bf5f3c2865bd3deee8d01a724f21c23d
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.10.1
